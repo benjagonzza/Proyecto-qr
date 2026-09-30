@@ -1,0 +1,194 @@
+MDBoxLayout:
+    orientation: 'vertical'
+
+    MDTopAppBar:
+        title: "Lab Redes A+S - QR"
+        elevation: 2
+
+    MDScreenManager:
+        id: screen_manager
+
+        PantallaInicio:
+            name: 'inicio'
+        PantallaCatalogo:
+            name: 'catalogo'
+        PantallaEscaner:
+            name: 'escaner'
+        PantallaPrestamos:
+            name: 'prestamos'
+
+    # Barra de Navegación Inferior (Material Design)
+    MDBoxLayout:
+        size_hint_y: None
+        height: "60dp"
+        padding: "8dp"
+        spacing: "8dp"
+        md_bg_color: 0.1, 0.1, 0.12, 1
+
+        MDButton:
+            style: "text"
+            on_release: app.cambiar_pantalla('inicio')
+            MDButtonText:
+                text: "Inicio"
+
+        MDButton:
+            style: "text"
+            on_release: app.cambiar_pantalla('catalogo')
+            MDButtonText:
+                text: "Catálogo"
+
+        MDButton:
+            style: "filled"
+            on_release: app.cambiar_pantalla('escaner')
+            MDButtonText:
+                text: "Escáner"
+
+        MDButton:
+            style: "text"
+            on_release: app.cambiar_pantalla('prestamos')
+            MDButtonText:
+                text: "Préstamos"
+
+
+<PantallaInicio>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: "16dp"
+        spacing: "12dp"
+
+        MDLabel:
+            text: "Hola, Benjamín (Lab Redes A+S)"
+            font_style: "Title"
+            role: "medium"
+            size_hint_y: None
+            height: "30dp"
+
+        # Métricas principales
+        MDBoxLayout:
+            size_hint_y: None
+            height: "80dp"
+            spacing: "8dp"
+
+            MDCard:
+                padding: "8dp"
+                style: "outlined"
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    MDLabel:
+                        id: lbl_disp
+                        text: "0"
+                        halign: "center"
+                        font_style: "Headline"
+                    MDLabel:
+                        text: "Disponibles"
+                        halign: "center"
+
+            MDCard:
+                padding: "8dp"
+                style: "outlined"
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    MDLabel:
+                        id: lbl_prest
+                        text: "0"
+                        halign: "center"
+                        font_style: "Headline"
+                    MDLabel:
+                        text: "Prestados"
+                        halign: "center"
+
+            MDCard:
+                padding: "8dp"
+                style: "outlined"
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    MDLabel:
+                        id: lbl_desu
+                        text: "0"
+                        halign: "center"
+                        font_style: "Headline"
+                    MDLabel:
+                        text: "En Desuso"
+                        halign: "center"
+
+        MDCard:
+            padding: "12dp"
+            size_hint_y: None
+            height: "70dp"
+            on_release: app.cambiar_pantalla('escaner')
+            MDBoxLayout:
+                orientation: 'vertical'
+                MDLabel:
+                    text: "Acceso Rápido Escáner QR"
+                    font_style: "Title"
+                    role: "small"
+                MDLabel:
+                    text: "Toca aquí para escanear y cambiar estados"
+                    font_style: "Body"
+                    role: "small"
+
+
+<PantallaCatalogo>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: "16dp"
+        spacing: "12dp"
+
+        MDLabel:
+            text: "Catálogo de Equipos"
+            font_style: "Title"
+            size_hint_y: None
+            height: "30dp"
+
+        MDTextField:
+            hint_text: "Buscar por nombre, categoría o QR..."
+            on_text: app.actualizar_catalogo(self.text)
+
+        MDScrollView:
+            MDList:
+                id: lista_catalogo
+
+
+<PantallaEscaner>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: "16dp"
+        spacing: "12dp"
+
+        MDLabel:
+            text: "Simulador de Cámara QR"
+            font_style: "Title"
+            size_hint_y: None
+            height: "30dp"
+
+        MDCard:
+            size_hint: (0.8, 0.25)
+            pos_hint: {"center_x": 0.5}
+            style: "outlined"
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: "16dp"
+                MDLabel:
+                    text: "[ Enfoque el código QR ]"
+                    halign: "center"
+
+        MDScrollView:
+            MDList:
+                id: lista_escaner
+
+
+<PantallaPrestamos>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: "16dp"
+        spacing: "12dp"
+
+        MDLabel:
+            text: "Préstamos Activos"
+            font_style: "Title"
+            size_hint_y: None
+            height: "30dp"
+
+        MDScrollView:
+            MDList:
+                id: lista_prestamos
