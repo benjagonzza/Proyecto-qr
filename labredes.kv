@@ -1,9 +1,27 @@
 MDBoxLayout:
     orientation: 'vertical'
+    md_bg_color: 0.07, 0.08, 0.10, 1
 
-    MDTopAppBar:
-        title: "Lab Redes A+S - QR"
-        elevation: 2
+    # Header / Top Bar
+    MDBoxLayout:
+        size_hint_y: None
+        height: "56dp"
+        padding: ["16dp", "0dp", "16dp", "0dp"]
+        md_bg_color: 0.11, 0.13, 0.17, 1
+
+        MDIcon:
+            icon: "server-network"
+            font_size: "26sp"
+            pos_hint: {"center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.0, 0.75, 0.92, 1
+
+        MDLabel:
+            text: " Lab Redes A+S"
+            font_style: "Title"
+            role: "medium"
+            bold: True
+            pos_hint: {"center_y": 0.5}
 
     MDScreenManager:
         id: screen_manager
@@ -17,35 +35,53 @@ MDBoxLayout:
         PantallaPrestamos:
             name: 'prestamos'
 
-    # Barra de Navegación Inferior (Material Design)
+    # Bottom Navigation
     MDBoxLayout:
         size_hint_y: None
-        height: "60dp"
-        padding: "8dp"
-        spacing: "8dp"
-        md_bg_color: 0.1, 0.1, 0.12, 1
+        height: "65dp"
+        padding: ["6dp", "4dp", "6dp", "4dp"]
+        spacing: "4dp"
+        md_bg_color: 0.11, 0.13, 0.17, 1
 
         MDButton:
             style: "text"
+            size_hint_x: 0.25
             on_release: app.cambiar_pantalla('inicio')
+            MDButtonIcon:
+                icon: "home"
             MDButtonText:
                 text: "Inicio"
 
         MDButton:
             style: "text"
+            size_hint_x: 0.25
             on_release: app.cambiar_pantalla('catalogo')
+            MDButtonIcon:
+                icon: "format-list-bulleted"
             MDButtonText:
                 text: "Catálogo"
 
         MDButton:
             style: "filled"
+            size_hint_x: 0.25
+            theme_bg_color: "Custom"
+            md_bg_color: 0.0, 0.72, 0.92, 1
             on_release: app.cambiar_pantalla('escaner')
+            MDButtonIcon:
+                icon: "qrcode"
+                theme_icon_color: "Custom"
+                icon_color: 0, 0, 0, 1
             MDButtonText:
-                text: "Escáner"
+                text: "Código QR"
+                theme_text_color: "Custom"
+                text_color: 0, 0, 0, 1
 
         MDButton:
             style: "text"
+            size_hint_x: 0.25
             on_release: app.cambiar_pantalla('prestamos')
+            MDButtonIcon:
+                icon: "hand-holding"
             MDButtonText:
                 text: "Préstamos"
 
@@ -54,24 +90,52 @@ MDBoxLayout:
     MDBoxLayout:
         orientation: 'vertical'
         padding: "16dp"
-        spacing: "12dp"
+        spacing: "14dp"
 
-        MDLabel:
-            text: "Hola, Benjamín (Lab Redes A+S)"
-            font_style: "Title"
-            role: "medium"
+        MDCard:
             size_hint_y: None
-            height: "30dp"
+            height: "68dp"
+            padding: "12dp"
+            style: "filled"
+            theme_bg_color: "Custom"
+            md_bg_color: 0.13, 0.16, 0.22, 1
+            radius: [16, 16, 16, 16]
 
-        # Métricas principales
+            MDBoxLayout:
+                spacing: "12dp"
+                MDIcon:
+                    icon: "account-circle"
+                    font_size: "36sp"
+                    pos_hint: {"center_y": 0.5}
+                    theme_text_color: "Custom"
+                    text_color: 0.0, 0.75, 0.92, 1
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    pos_hint: {"center_y": 0.5}
+                    MDLabel:
+                        text: "Hola, Benjamín"
+                        font_style: "Title"
+                        role: "small"
+                        bold: True
+                    MDLabel:
+                        text: "Laboratorio de Redes y Telecomunicaciones"
+                        font_style: "Body"
+                        role: "small"
+                        theme_text_color: "Custom"
+                        text_color: 0.6, 0.65, 0.7, 1
+
         MDBoxLayout:
             size_hint_y: None
-            height: "80dp"
+            height: "92dp"
             spacing: "8dp"
 
             MDCard:
                 padding: "8dp"
-                style: "outlined"
+                style: "filled"
+                theme_bg_color: "Custom"
+                md_bg_color: 0.09, 0.20, 0.14, 1
+                radius: [14, 14, 14, 14]
                 MDBoxLayout:
                     orientation: 'vertical'
                     MDLabel:
@@ -79,13 +143,24 @@ MDBoxLayout:
                         text: "0"
                         halign: "center"
                         font_style: "Headline"
+                        role: "small"
+                        bold: True
+                        theme_text_color: "Custom"
+                        text_color: 0.2, 0.85, 0.45, 1
                     MDLabel:
                         text: "Disponibles"
                         halign: "center"
+                        font_style: "Body"
+                        role: "small"
+                        theme_text_color: "Custom"
+                        text_color: 0.7, 0.9, 0.75, 1
 
             MDCard:
                 padding: "8dp"
-                style: "outlined"
+                style: "filled"
+                theme_bg_color: "Custom"
+                md_bg_color: 0.22, 0.16, 0.08, 1
+                radius: [14, 14, 14, 14]
                 MDBoxLayout:
                     orientation: 'vertical'
                     MDLabel:
@@ -93,13 +168,24 @@ MDBoxLayout:
                         text: "0"
                         halign: "center"
                         font_style: "Headline"
+                        role: "small"
+                        bold: True
+                        theme_text_color: "Custom"
+                        text_color: 1.0, 0.65, 0.2, 1
                     MDLabel:
                         text: "Prestados"
                         halign: "center"
+                        font_style: "Body"
+                        role: "small"
+                        theme_text_color: "Custom"
+                        text_color: 1.0, 0.85, 0.65, 1
 
             MDCard:
                 padding: "8dp"
-                style: "outlined"
+                style: "filled"
+                theme_bg_color: "Custom"
+                md_bg_color: 0.22, 0.10, 0.12, 1
+                radius: [14, 14, 14, 14]
                 MDBoxLayout:
                     orientation: 'vertical'
                     MDLabel:
@@ -107,25 +193,55 @@ MDBoxLayout:
                         text: "0"
                         halign: "center"
                         font_style: "Headline"
+                        role: "small"
+                        bold: True
+                        theme_text_color: "Custom"
+                        text_color: 1.0, 0.35, 0.35, 1
                     MDLabel:
                         text: "En Desuso"
                         halign: "center"
+                        font_style: "Body"
+                        role: "small"
+                        theme_text_color: "Custom"
+                        text_color: 1.0, 0.75, 0.75, 1
 
         MDCard:
-            padding: "12dp"
+            padding: "14dp"
             size_hint_y: None
-            height: "70dp"
+            height: "82dp"
+            style: "filled"
+            theme_bg_color: "Custom"
+            md_bg_color: 0.11, 0.20, 0.28, 1
+            radius: [16, 16, 16, 16]
             on_release: app.cambiar_pantalla('escaner')
+
             MDBoxLayout:
-                orientation: 'vertical'
-                MDLabel:
-                    text: "Acceso Rápido Escáner QR"
-                    font_style: "Title"
-                    role: "small"
-                MDLabel:
-                    text: "Toca aquí para escanear y cambiar estados"
-                    font_style: "Body"
-                    role: "small"
+                spacing: "12dp"
+                MDIcon:
+                    icon: "qrcode"
+                    font_size: "32sp"
+                    pos_hint: {"center_y": 0.5}
+                    theme_text_color: "Custom"
+                    text_color: 0.0, 0.75, 0.92, 1
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    pos_hint: {"center_y": 0.5}
+                    MDLabel:
+                        text: "Generador QR Interactivos"
+                        font_style: "Title"
+                        role: "small"
+                        bold: True
+                        theme_text_color: "Custom"
+                        text_color: 0.0, 0.82, 1, 1
+                    MDLabel:
+                        text: "Escanea con tu móvil para controlar la app en vivo"
+                        font_style: "Body"
+                        role: "small"
+                        theme_text_color: "Custom"
+                        text_color: 0.75, 0.88, 0.98, 1
+
+        Widget:
 
 
 <PantallaCatalogo>:
@@ -137,12 +253,18 @@ MDBoxLayout:
         MDLabel:
             text: "Catálogo de Equipos"
             font_style: "Title"
+            role: "medium"
             size_hint_y: None
-            height: "30dp"
+            height: "28dp"
+            bold: True
 
         MDTextField:
-            hint_text: "Buscar por nombre, categoría o QR..."
+            mode: "outlined"
             on_text: app.actualizar_catalogo(self.text)
+            MDTextFieldHintText:
+                text: "Buscar por nombre, categoría o QR..."
+            MDTextFieldLeadingIcon:
+                icon: "magnify"
 
         MDScrollView:
             MDList:
@@ -156,21 +278,63 @@ MDBoxLayout:
         spacing: "12dp"
 
         MDLabel:
-            text: "Simulador de Cámara QR"
+            text: "Escanea desde tu Celular"
             font_style: "Title"
+            role: "medium"
             size_hint_y: None
-            height: "30dp"
+            height: "28dp"
+            bold: True
 
+        # Tarjeta QR
         MDCard:
-            size_hint: (0.8, 0.25)
-            pos_hint: {"center_x": 0.5}
-            style: "outlined"
+            size_hint: (1, 0.48)
+            style: "filled"
+            theme_bg_color: "Custom"
+            md_bg_color: 0.98, 0.98, 0.98, 1
+            radius: [16, 16, 16, 16]
+            padding: "14dp"
+
             MDBoxLayout:
                 orientation: 'vertical'
-                padding: "16dp"
+                spacing: "6dp"
+
                 MDLabel:
-                    text: "[ Enfoque el código QR ]"
+                    id: lbl_qr_titulo
+                    text: "Cargando..."
+                    font_style: "Title"
+                    role: "small"
+                    bold: True
                     halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.1, 1
+                    size_hint_y: None
+                    height: "24dp"
+
+                Image:
+                    id: qr_image_view
+                    allow_stretch: True
+                    keep_ratio: True
+
+                MDLabel:
+                    id: lbl_qr_codigo
+                    text: "URL: --"
+                    font_style: "Body"
+                    role: "small"
+                    bold: True
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: 0.0, 0.4, 0.6, 1
+                    size_hint_y: None
+                    height: "24dp"
+
+        MDLabel:
+            text: "Selecciona un equipo para cambiar de QR:"
+            font_style: "Body"
+            role: "small"
+            size_hint_y: None
+            height: "20dp"
+            theme_text_color: "Custom"
+            text_color: 0.6, 0.65, 0.7, 1
 
         MDScrollView:
             MDList:
@@ -186,8 +350,10 @@ MDBoxLayout:
         MDLabel:
             text: "Préstamos Activos"
             font_style: "Title"
+            role: "medium"
             size_hint_y: None
-            height: "30dp"
+            height: "28dp"
+            bold: True
 
         MDScrollView:
             MDList:
