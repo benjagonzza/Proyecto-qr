@@ -1,7 +1,7 @@
 # Fundamentación UX/UI — Aplicación Lab Redes (A+S)
 
 ## 1. Metodología de Investigación
-Se aplicaron 5 entrevistas semiestructuradas y una encuesta a 15 estudiantes y encargados del Laboratorio de Redes del Instituto Tecnológico UC Temuco.
+Se aplicaron 3 entrevistas semiestructuradas y una encuesta a 5 estudiantes y encargados del Laboratorio de Redes del Instituto Tecnológico UC Temuco.
 
 ## 2. Resultados Principales con Evidencia
 * **Hallazgo 1:** El 80% de los estudiantes olvida registrar la devolución de herramientas por lo complejo del libro en papel.
