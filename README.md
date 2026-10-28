@@ -1,15 +1,16 @@
-# Lab Redes A+S - Control de Inventario QR
+# LabRedes A+S - Control de Inventario y Notificaciones
 
-## Problema
-Pérdida de trazabilidad y lentitud en el préstamo de herramientas en el laboratorio de redes.
+Aplicación móvil/desktop desarrollada en Python con KivyMD y Flask para la gestión en tiempo real del inventario del Laboratorio de Redes de la Universidad Católica de Temuco.
 
-## Usuario Objetivo
-Estudiantes y docentes del área Informática / Telecomunicaciones del IT UC Temuco.
+## 👥 Integrantes
+* **Benjamín González**
+* **Sebastián Chinchón**
 
-## Instrucciones de Ejecución
-```bash
-pip install kivy kivymd
-python main.py
+---
 
-Declaración de Uso de IA
-Se utilizó IA como asistente para la optimización de sintaxis KV y estructuración de componentes KivyMD.
+## 📋 Requisitos e Instalación Paso a Paso
+
+1. Clonar el repositorio:
+   ```bash
+   git clone [https://github.com/benjagonzza/Proyecto-qr.git](https://github.com/benjagonzza/Proyecto-qr.git)
+   cd Proyecto-qr

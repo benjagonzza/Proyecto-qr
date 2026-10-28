@@ -1,0 +1,34 @@
+[
+    {
+        "nombre": "Switch Cisco Catalyst 2960",
+        "cat": "Switches",
+        "qr": "QR-SW-2960",
+        "ubicacion": "Estante A1",
+        "estado": "En Préstamo",
+        "icon": "lan"
+    },
+    {
+        "nombre": "Router MikroTik RB750Gr3",
+        "cat": "Routers",
+        "qr": "QR-RT-750",
+        "ubicacion": "Estante B2",
+        "estado": "Disponible",
+        "icon": "router-wireless"
+    },
+    {
+        "nombre": "Crimpadora RJ45 Profesional",
+        "cat": "Herramientas",
+        "qr": "QR-CR-001",
+        "ubicacion": "Caja 3",
+        "estado": "En Préstamo",
+        "icon": "tools"
+    },
+    {
+        "nombre": "Tester de Red Fluke Networks",
+        "cat": "Medición",
+        "qr": "QR-TS-800",
+        "ubicacion": "Estante C1",
+        "estado": "En Desuso",
+        "icon": "sine-wave"
+    }
+]
