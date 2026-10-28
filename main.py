@@ -385,5 +385,9 @@ class LabRedesApp(MDApp):
         self.dialog.open()
 
 
+
 if __name__ == '__main__':
+    print("\n" + "="*40)
+    print(">>> ¡ATENCIÓN! SE ESTÁ EJECUTANDO EL MAIN ACTUALIZADO <<<")
+    print("="*40 + "\n")
     LabRedesApp().run()
