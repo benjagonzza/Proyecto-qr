@@ -6,8 +6,6 @@ import traceback
 from io import BytesIO
 import qrcode
 
-os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
-
 from flask import Flask, render_template_string, request
 
 from kivy.core.window import Window
@@ -25,7 +23,7 @@ from kivymd.uix.dialog import (
     MDDialogSupportingText,
     MDDialogButtonContainer,
 )
-from kivymd.uix.button import MDButton, MDButtonText
+from kivymd.uix.button import MDButton, MDButtonText, MDButtonIcon
 from kivymd.uix.list import (
     MDListItem, 
     MDListItemHeadlineText, 
@@ -41,6 +39,7 @@ except Exception:
     PLYER_DISPONIBLE = False
 
 def emitir_notificacion_nativa(titulo, mensaje):
+    """Dispara notificación emergente nativa del sistema operativo."""
     if PLYER_DISPONIBLE:
         try:
             notification.notify(
@@ -65,7 +64,7 @@ def obtener_ip_local():
         s.close()
     return ip
 
-# --- SERVIDOR WEB FLASK (SINCRONIZACIÓN MÓVIL QR) ---
+# --- SERVIDOR WEB FLASK (SINCRONIZACIÓN MÓVIL POR QR) ---
 flask_app = Flask(__name__)
 app_kivy_ref = None
 
@@ -120,7 +119,7 @@ def cambiar_estado_web():
         return render_template_string(HTML_TEMPLATE, equipo=equipo)
     return "Error", 500
 
-# --- PANTALLAS ---
+# --- CLASES DE PANTALLAS ---
 class PantallaLogin(MDScreen): pass
 class PantallaRegistro(MDScreen): pass
 class PantallaInicio(MDScreen): pass
@@ -130,6 +129,7 @@ class PantallaPrestamos(MDScreen): pass
 
 # --- CLASE PRINCIPAL ---
 class LabRedesApp(MDApp):
+    # SERVICIO 4: REMOTE CONFIG CON FALLBACK LOCAL
     mensaje_banner = StringProperty("¡Bienvenidos al LabRedes UCT! (Modo Local)")
     contacto_soporte = StringProperty("Soporte: labredes@uct.cl")
     
@@ -144,16 +144,23 @@ class LabRedesApp(MDApp):
         self.ip_local = obtener_ip_local()
         self.usuario_actual = None
 
+        # Cargar datos de persistencia JSON local
         self.usuarios = self.cargar_usuarios_json()
         self.inventario = self.cargar_inventario_json()
 
+        # Iniciar servidor web Flask en segundo plano
         threading.Thread(target=lambda: flask_app.run(host='0.0.0.0', port=5000, debug=False), daemon=True).start()
         
         return Builder.load_file('labredes.kv')
 
     def on_start(self):
+        if self.root:
+            self.root.current = 'login'
         self.cargar_remote_config()
 
+    # ==========================================
+    # SERVICIO 1 & 2: AUTENTICACIÓN Y PERSISTENCIA USUARIOS
+    # ==========================================
     def cargar_usuarios_json(self):
         if os.path.exists("usuarios.json"):
             try:
@@ -172,7 +179,10 @@ class LabRedesApp(MDApp):
         password = password.strip()
         if email in self.usuarios and self.usuarios[email] == password:
             self.usuario_actual = email
-            emitir_notificacion_nativa("Acceso Correcto", f"Bienvenido/a {email}")
+            
+            # --- NOTIFICACIÓN 1 DE WINDOWS ---
+            emitir_notificacion_nativa("🔑 Acceso Autorizado", f"Bienvenido/a {email} al sistema LabRedes UCT.")
+            
             self.actualizar_todo()
             self.cambiar_pantalla("inicio")
         else:
@@ -193,9 +203,26 @@ class LabRedesApp(MDApp):
 
         self.usuarios[email] = password
         self.guardar_usuarios_json()
-        emitir_notificacion_nativa("Registro Exitoso", "Cuenta creada correctamente.")
+        
+        # --- NOTIFICACIÓN 1 DE WINDOWS (REGISTRO) ---
+        emitir_notificacion_nativa("🔑 Registro Exitoso", f"Cuenta creada para {email}.")
+        
         self.cambiar_pantalla("login")
 
+    def cerrar_sesion(self):
+        """Reinicia el estado del usuario activo y regresa a la pantalla de login."""
+        usuario_saliente = self.usuario_actual or "Usuario"
+        self.usuario_actual = None
+        
+        emitir_notificacion_nativa(
+            "🔒 Sesión Cerrada", 
+            f"Hasta luego, {usuario_saliente}. Has salido del sistema."
+        )
+        self.cambiar_pantalla("login")
+
+    # ==========================================
+    # SERVICIO 2: PERSISTENCIA JSON INVENTARIO
+    # ==========================================
     def cargar_inventario_json(self):
         if os.path.exists("inventario.json"):
             try:
@@ -214,6 +241,9 @@ class LabRedesApp(MDApp):
         with open("inventario.json", "w", encoding="utf-8") as f:
             json.dump(self.inventario, f, indent=4, ensure_ascii=False)
 
+    # ==========================================
+    # SERVICIO 3: MUTACIÓN POO Y NOTIFICACIÓN PLYER
+    # ==========================================
     def actualizar_estado_equipo_poo(self, codigo_qr, nuevo_estado, origen="Desktop"):
         for equipo in self.inventario:
             if equipo["qr"].lower() == codigo_qr.lower():
@@ -222,12 +252,16 @@ class LabRedesApp(MDApp):
                 
                 Clock.schedule_once(lambda dt: self.actualizar_todo(), 0)
                 
+                # --- NOTIFICACIÓN 2 DE WINDOWS ---
                 emitir_notificacion_nativa(
-                    "🔄 Inventario Actualizado",
-                    f"{equipo['nombre']} -> {nuevo_estado} ({origen})"
+                    "📦 Alerta de Inventario",
+                    f"El equipo '{equipo['nombre']}' cambió su estado a: {nuevo_estado} ({origen})."
                 )
                 break
 
+    # ==========================================
+    # SERVICIO 4: REMOTE CONFIG CON URLREQUEST
+    # ==========================================
     def cargar_remote_config(self):
         def al_exito(req, resultado):
             if isinstance(resultado, dict):
@@ -242,6 +276,7 @@ class LabRedesApp(MDApp):
         except Exception:
             al_error(None, None)
 
+    # --- NAVEGACIÓN Y COMPONENTES DE INTERFAZ ---
     def cambiar_pantalla(self, nombre_pantalla):
         self.root.current = nombre_pantalla
 
