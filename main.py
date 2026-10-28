@@ -46,7 +46,7 @@ def emitir_notificacion_nativa(titulo, mensaje):
                 title=titulo,
                 message=mensaje,
                 app_name="LabRedes A+S",
-                timeout=4
+                timeout=10
             )
         except Exception as e:
             print(f"[PLYER ERROR]: {e}")
