@@ -1,602 +1,706 @@
-<PantallaLogin>:
-    name: 'login'
+#:import dp kivy.metrics.dp
+
+<CardPanel@MDBoxLayout>:
+    orientation: "vertical"
+    padding: dp(14)
+    spacing: dp(8)
+    adaptive_height: True
+    md_bg_color: 0.08, 0.12, 0.20, 1
+    radius: [dp(16)]
+    line_color: 0.16, 0.24, 0.36, 1
+    line_width: 1.1
+
+<NavBar@MDBoxLayout>:
+    active_tab: "inicio"
+    size_hint_y: None
+    height: dp(62)
+    padding: [dp(4), dp(4)]
+    spacing: dp(2)
+    md_bg_color: 0.06, 0.09, 0.16, 1
+    line_color: 0.16, 0.24, 0.36, 1
+    line_width: 1
+    on_kv_post:
+        while len(self.children) > 4: self.remove_widget(self.children[0])
+
     MDBoxLayout:
-        orientation: 'vertical'
-        padding: "20dp"
-        spacing: "16dp"
-
-        Widget:
-
-        MDCard:
-            orientation: "vertical"
-            padding: "24dp"
-            spacing: "16dp"
-            size_hint_y: None
-            height: "460dp"
-            radius: [24, 24, 24, 24]
-            style: "elevated"
-            md_bg_color: 0.11, 0.15, 0.23, 1
-
-            MDIcon:
-                icon: "router-network"
-                font_size: "56sp"
-                pos_hint: {"center_x": .5}
-                theme_text_color: "Custom"
-                text_color: 0.22, 0.74, 0.97, 1
-
-            MDLabel:
-                text: "LabRedes A+S"
-                font_style: "Headline"
-                role: "medium"
-                bold: True
-                halign: "center"
-                theme_text_color: "Custom"
-                text_color: 0.22, 0.74, 0.97, 1
-
-            MDLabel:
-                text: "Gestión de Inventario UC Temuco"
-                font_style: "Body"
-                role: "small"
-                halign: "center"
-                theme_text_color: "Custom"
-                text_color: 0.8, 0.8, 0.8, 1
-
-            MDTextField:
-                id: txt_login_email
-                mode: "outlined"
-
-                MDTextFieldHintText:
-                    text: "admin@uct.cl"
-                    text_color_normal: 0.7, 0.8, 0.9, 1
-                    text_color_focus: 0.22, 0.74, 0.97, 1
-
-            MDTextField:
-                id: txt_login_pass
-                mode: "outlined"
-                password: True
-
-                MDTextFieldHintText:
-                    text: "Contraseña (ej. 123456)"
-                    text_color_normal: 0.7, 0.8, 0.9, 1
-                    text_color_focus: 0.22, 0.74, 0.97, 1
-
-            MDButton:
-                style: "filled"
-                size_hint_x: 1
-                on_release: app.ejecutar_login(txt_login_email.text, txt_login_pass.text)
-                MDButtonText:
-                    text: "INGRESAR AL SISTEMA"
-                    bold: True
-
-            MDButton:
-                style: "text"
-                size_hint_x: 1
-                on_release: app.cambiar_pantalla('registro')
-                MDButtonText:
-                    text: "¿No tienes cuenta? Regístrate aquí"
-
-        Widget:
-
-
-<PantallaRegistro>:
-    name: 'registro'
-    MDBoxLayout:
-        orientation: 'vertical'
-        padding: "20dp"
-        spacing: "16dp"
-
-        Widget:
-
-        MDCard:
-            orientation: "vertical"
-            padding: "24dp"
-            spacing: "12dp"
-            size_hint_y: None
-            height: "520dp"
-            radius: [24, 24, 24, 24]
-            style: "elevated"
-            md_bg_color: 0.11, 0.15, 0.23, 1
-
-            MDIcon:
-                icon: "account-plus"
-                font_size: "44sp"
-                pos_hint: {"center_x": .5}
-                theme_text_color: "Custom"
-                text_color: 0.22, 0.74, 0.97, 1
-
-            MDLabel:
-                text: "Registro de Usuario"
-                font_style: "Title"
-                role: "large"
-                bold: True
-                halign: "center"
-                theme_text_color: "Custom"
-                text_color: 1, 1, 1, 1
-
-            MDCard:
-                orientation: "vertical"
-                padding: "8dp"
-                size_hint_y: None
-                height: "50dp"
-                radius: [8, 8, 8, 8]
-                md_bg_color: 0.08, 0.22, 0.32, 1
-
-                MDLabel:
-                    text: "Requisitos: Correo institucional y contraseñas iguales."
-                    font_style: "Body"
-                    role: "small"
-                    halign: "center"
-                    bold: True
-                    theme_text_color: "Custom"
-                    text_color: 0.38, 0.85, 0.98, 1
-
-            MDTextField:
-                id: txt_reg_email
-                mode: "outlined"
-
-                MDTextFieldHintText:
-                    text: "ejemplo@correo.com"
-                    text_color_normal: 0.7, 0.8, 0.9, 1
-                    text_color_focus: 0.22, 0.74, 0.97, 1
-
-            MDTextField:
-                id: txt_reg_pass
-                mode: "outlined"
-                password: True
-
-                MDTextFieldHintText:
-                    text: "Contraseña nueva"
-                    text_color_normal: 0.7, 0.8, 0.9, 1
-                    text_color_focus: 0.22, 0.74, 0.97, 1
-
-            MDTextField:
-                id: txt_reg_confirm
-                mode: "outlined"
-                password: True
-
-                MDTextFieldHintText:
-                    text: "Confirmar contraseña"
-                    text_color_normal: 0.7, 0.8, 0.9, 1
-                    text_color_focus: 0.22, 0.74, 0.97, 1
-
-            MDButton:
-                style: "filled"
-                size_hint_x: 1
-                on_release: app.registrar_usuario(txt_reg_email.text, txt_reg_pass.text, txt_reg_confirm.text)
-                MDButtonText:
-                    text: "CREAR CUENTA"
-
-            MDButton:
-                style: "outlined"
-                size_hint_x: 1
-                on_release: app.cambiar_pantalla('login')
-                MDButtonText:
-                    text: "VOLVER AL LOGIN"
-
-        Widget:
-
-
-<PantallaInicio>:
-    name: 'inicio'
-    MDBoxLayout:
-        orientation: 'vertical'
-
-        MDBoxLayout:
-            orientation: 'vertical'
-            padding: "16dp", "16dp", "16dp", "8dp"
-            spacing: "14dp"
-
-            MDBoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: "48dp"
-                spacing: "12dp"
-
-                MDIcon:
-                    icon: "shield-check"
-                    font_size: "36sp"
-                    theme_text_color: "Custom"
-                    text_color: 0.22, 0.74, 0.97, 1
-
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    MDLabel:
-                        text: "LabRedes UCT"
-                        font_style: "Title"
-                        role: "medium"
-                        bold: True
-                        theme_text_color: "Custom"
-                        text_color: 0.22, 0.74, 0.97, 1
-                    MDLabel:
-                        text: "Panel de Monitoreo A+S"
-                        font_style: "Body"
-                        role: "small"
-                        theme_text_color: "Custom"
-                        text_color: 0.8, 0.8, 0.8, 1
-
-                MDButton:
-                    style: "text"
-                    on_release: app.cerrar_sesion()
-                    pos_hint: {"center_y": .5}
-                    MDButtonIcon:
-                        icon: "logout"
-                        theme_text_color: "Custom"
-                        text_color: 1, 0.4, 0.4, 1
-
-            MDCard:
-                orientation: "horizontal"
-                padding: "12dp"
-                spacing: "12dp"
-                size_hint_y: None
-                height: "85dp"
-                radius: [16, 16, 16, 16]
-                style: "elevated"
-                md_bg_color: 0.08, 0.22, 0.32, 1
-
-                MDIcon:
-                    icon: "bullhorn-outline"
-                    font_size: "32sp"
-                    pos_hint: {"center_y": .5}
-                    theme_text_color: "Custom"
-                    text_color: 0.38, 0.85, 0.98, 1
-
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    pos_hint: {"center_y": .5}
-
-                    MDLabel:
-                        text: app.mensaje_banner
-                        font_style: "Body"
-                        role: "medium"
-                        bold: True
-                        theme_text_color: "Custom"
-                        text_color: 1, 1, 1, 1
-
-                    MDLabel:
-                        text: app.contacto_soporte
-                        font_style: "Body"
-                        role: "small"
-                        theme_text_color: "Custom"
-                        text_color: 0.8, 0.8, 0.8, 1
-
-            MDLabel:
-                text: "Resumen de Inventario"
-                font_style: "Title"
-                role: "small"
-                bold: True
-                size_hint_y: None
-                height: "24dp"
-
-            MDBoxLayout:
-                orientation: 'horizontal'
-                spacing: "10dp"
-                size_hint_y: None
-                height: "105dp"
-
-                MDCard:
-                    orientation: "vertical"
-                    padding: "10dp"
-                    radius: [16, 16, 16, 16]
-                    md_bg_color: 0.06, 0.24, 0.15, 1
-
-                    MDIcon:
-                        icon: "check-circle-outline"
-                        font_size: "22sp"
-                        theme_text_color: "Custom"
-                        text_color: 0.2, 0.9, 0.5, 1
-
-                    MDLabel:
-                        id: lbl_disp
-                        text: "0"
-                        font_style: "Headline"
-                        role: "medium"
-                        bold: True
-                        halign: "center"
-                        theme_text_color: "Custom"
-                        text_color: 0.2, 0.9, 0.5, 1
-
-                    MDLabel:
-                        text: "Disponibles"
-                        halign: "center"
-                        font_style: "Body"
-                        role: "small"
-                        theme_text_color: "Custom"
-                        text_color: 0.8, 0.8, 0.8, 1
-
-                MDCard:
-                    orientation: "vertical"
-                    padding: "10dp"
-                    radius: [16, 16, 16, 16]
-                    md_bg_color: 0.28, 0.2, 0.05, 1
-
-                    MDIcon:
-                        icon: "clock-outline"
-                        font_size: "22sp"
-                        theme_text_color: "Custom"
-                        text_color: 1, 0.75, 0.2, 1
-
-                    MDLabel:
-                        id: lbl_prest
-                        text: "0"
-                        font_style: "Headline"
-                        role: "medium"
-                        bold: True
-                        halign: "center"
-                        theme_text_color: "Custom"
-                        text_color: 1, 0.75, 0.2, 1
-
-                    MDLabel:
-                        text: "En Préstamo"
-                        halign: "center"
-                        font_style: "Body"
-                        role: "small"
-                        theme_text_color: "Custom"
-                        text_color: 0.8, 0.8, 0.8, 1
-
-                MDCard:
-                    orientation: "vertical"
-                    padding: "10dp"
-                    radius: [16, 16, 16, 16]
-                    md_bg_color: 0.28, 0.08, 0.1, 1
-
-                    MDIcon:
-                        icon: "alert-circle-outline"
-                        font_size: "22sp"
-                        theme_text_color: "Custom"
-                        text_color: 1, 0.4, 0.4, 1
-
-                    MDLabel:
-                        id: lbl_desu
-                        text: "0"
-                        font_style: "Headline"
-                        role: "medium"
-                        bold: True
-                        halign: "center"
-                        theme_text_color: "Custom"
-                        text_color: 1, 0.4, 0.4, 1
-
-                    MDLabel:
-                        text: "En Desuso"
-                        halign: "center"
-                        font_style: "Body"
-                        role: "small"
-                        theme_text_color: "Custom"
-                        text_color: 0.8, 0.8, 0.8, 1
-
-            MDCard:
-                orientation: "horizontal"
-                padding: "14dp"
-                spacing: "12dp"
-                radius: [16, 16, 16, 16]
-                style: "elevated"
-                md_bg_color: 0.12, 0.16, 0.24, 1
-
-                MDIcon:
-                    icon: "cellphone-link"
-                    font_size: "32sp"
-                    pos_hint: {"center_y": .5}
-                    theme_text_color: "Custom"
-                    text_color: 0.22, 0.74, 0.97, 1
-
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    pos_hint: {"center_y": .5}
-
-                    MDLabel:
-                        text: "Sincronización Activa"
-                        font_style: "Body"
-                        role: "medium"
-                        bold: True
-
-                    MDLabel:
-                        text: "Escanee el código QR desde cualquier móvil para actualizar estados en vivo."
-                        font_style: "Body"
-                        role: "small"
-                        theme_text_color: "Custom"
-                        text_color: 0.8, 0.8, 0.8, 1
-
-            Widget:
-
-        MDNavigationBar:
-            MDNavigationItem:
-                active: True
-                on_release: app.cambiar_pantalla('inicio')
-                MDNavigationItemIcon:
-                    icon: "home"
-                MDNavigationItemLabel:
-                    text: "Inicio"
-            MDNavigationItem:
-                on_release: app.cambiar_pantalla('catalogo')
-                MDNavigationItemIcon:
-                    icon: "format-list-bulleted"
-                MDNavigationItemLabel:
-                    text: "Catálogo"
-            MDNavigationItem:
-                on_release: app.cambiar_pantalla('escaner')
-                MDNavigationItemIcon:
-                    icon: "qrcode-scan"
-                MDNavigationItemLabel:
-                    text: "Código QR"
-            MDNavigationItem:
-                on_release: app.cambiar_pantalla('prestamos')
-                MDNavigationItemIcon:
-                    icon: "hand-holding"
-                MDNavigationItemLabel:
-                    text: "Préstamos"
-
-
-<PantallaCatalogo>:
-    name: 'catalogo'
-    MDBoxLayout:
-        orientation: 'vertical'
-        padding: "12dp"
-        spacing: "10dp"
-
-        MDTextField:
-            mode: "outlined"
-            on_text: app.actualizar_catalogo(self.text)
-
-            MDTextFieldHintText:
-                text: "Buscar por equipo, categoría o código..."
-                text_color_normal: 0.7, 0.8, 0.9, 1
-                text_color_focus: 0.22, 0.74, 0.97, 1
-
-        MDScrollView:
-            MDList:
-                id: lista_catalogo
-
-        MDNavigationBar:
-            MDNavigationItem:
-                on_release: app.cambiar_pantalla('inicio')
-                MDNavigationItemIcon:
-                    icon: "home"
-                MDNavigationItemLabel:
-                    text: "Inicio"
-            MDNavigationItem:
-                active: True
-                on_release: app.cambiar_pantalla('catalogo')
-                MDNavigationItemIcon:
-                    icon: "format-list-bulleted"
-                MDNavigationItemLabel:
-                    text: "Catálogo"
-            MDNavigationItem:
-                on_release: app.cambiar_pantalla('escaner')
-                MDNavigationItemIcon:
-                    icon: "qrcode-scan"
-                MDNavigationItemLabel:
-                    text: "Código QR"
-            MDNavigationItem:
-                on_release: app.cambiar_pantalla('prestamos')
-                MDNavigationItemIcon:
-                    icon: "hand-holding"
-                MDNavigationItemLabel:
-                    text: "Préstamos"
-
-
-<PantallaEscaner>:
-    name: 'escaner'
-    MDBoxLayout:
-        orientation: 'vertical'
-        padding: "12dp"
-        spacing: "10dp"
-
-        MDCard:
-            orientation: "vertical"
-            padding: "12dp"
-            spacing: "8dp"
-            size_hint_y: None
-            height: "260dp"
-            radius: [16, 16, 16, 16]
-            style: "elevated"
-            md_bg_color: 0.12, 0.16, 0.24, 1
-
-            MDLabel:
-                id: lbl_qr_titulo
-                text: "Seleccione un equipo del listado"
-                font_style: "Title"
-                role: "medium"
-                bold: True
-                halign: "center"
-                theme_text_color: "Custom"
-                text_color: 0.22, 0.74, 0.97, 1
-
-            Image:
-                id: qr_image_view
-                size_hint_y: 0.65
-
-            MDLabel:
-                id: lbl_qr_codigo
-                text: "Escanee el código con la cámara del celular"
-                font_style: "Body"
-                role: "small"
-                halign: "center"
-                theme_text_color: "Custom"
-                text_color: 0.8, 0.8, 0.8, 1
-
-        MDScrollView:
-            MDList:
-                id: lista_escaner
-
-        MDNavigationBar:
-            MDNavigationItem:
-                on_release: app.cambiar_pantalla('inicio')
-                MDNavigationItemIcon:
-                    icon: "home"
-                MDNavigationItemLabel:
-                    text: "Inicio"
-            MDNavigationItem:
-                on_release: app.cambiar_pantalla('catalogo')
-                MDNavigationItemIcon:
-                    icon: "format-list-bulleted"
-                MDNavigationItemLabel:
-                    text: "Catálogo"
-            MDNavigationItem:
-                active: True
-                on_release: app.cambiar_pantalla('escaner')
-                MDNavigationItemIcon:
-                    icon: "qrcode-scan"
-                MDNavigationItemLabel:
-                    text: "Código QR"
-            MDNavigationItem:
-                on_release: app.cambiar_pantalla('prestamos')
-                MDNavigationItemIcon:
-                    icon: "hand-holding"
-                MDNavigationItemLabel:
-                    text: "Préstamos"
-
-
-<PantallaPrestamos>:
-    name: 'prestamos'
-    MDBoxLayout:
-        orientation: 'vertical'
-        padding: "12dp"
-        spacing: "10dp"
-
-        MDLabel:
-            text: "Equipos en Préstamo Activo"
-            font_style: "Title"
-            role: "medium"
-            bold: True
+        orientation: "vertical"
+        MDIconButton:
+            icon: "view-dashboard"
+            pos_hint: {"center_x": .5}
             theme_text_color: "Custom"
-            text_color: 1, 0.75, 0.2, 1
+            text_color: (0.0, 0.85, 0.95, 1) if root.active_tab == "inicio" else (0.55, 0.62, 0.72, 1)
+            on_release: app.cambiar_pantalla("inicio")
+        MDLabel:
+            text: "Inicio"
+            halign: "center"
+            font_size: "10sp"
+            bold: root.active_tab == "inicio"
+            theme_text_color: "Custom"
+            text_color: (0.0, 0.85, 0.95, 1) if root.active_tab == "inicio" else (0.55, 0.62, 0.72, 1)
 
-        MDScrollView:
-            MDList:
-                id: lista_prestamos
+    MDBoxLayout:
+        orientation: "vertical"
+        MDIconButton:
+            icon: "server-network"
+            pos_hint: {"center_x": .5}
+            theme_text_color: "Custom"
+            text_color: (0.0, 0.85, 0.95, 1) if root.active_tab == "catalogo" else (0.55, 0.62, 0.72, 1)
+            on_release: app.cambiar_pantalla("catalogo")
+        MDLabel:
+            text: "Catálogo"
+            halign: "center"
+            font_size: "10sp"
+            bold: root.active_tab == "catalogo"
+            theme_text_color: "Custom"
+            text_color: (0.0, 0.85, 0.95, 1) if root.active_tab == "catalogo" else (0.55, 0.62, 0.72, 1)
 
-        MDNavigationBar:
-            MDNavigationItem:
-                on_release: app.cambiar_pantalla('inicio')
-                MDNavigationItemIcon:
-                    icon: "home"
-                MDNavigationItemLabel:
-                    text: "Inicio"
-            MDNavigationItem:
-                on_release: app.cambiar_pantalla('catalogo')
-                MDNavigationItemIcon:
-                    icon: "format-list-bulleted"
-                MDNavigationItemLabel:
-                    text: "Catálogo"
-            MDNavigationItem:
-                on_release: app.cambiar_pantalla('escaner')
-                MDNavigationItemIcon:
-                    icon: "qrcode-scan"
-                MDNavigationItemLabel:
-                    text: "Código QR"
-            MDNavigationItem:
-                active: True
-                on_release: app.cambiar_pantalla('prestamos')
-                MDNavigationItemIcon:
-                    icon: "hand-holding"
-                MDNavigationItemLabel:
-                    text: "Préstamos"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDIconButton:
+            icon: "qrcode-scan"
+            pos_hint: {"center_x": .5}
+            theme_text_color: "Custom"
+            text_color: (0.0, 0.85, 0.95, 1) if root.active_tab == "escaner" else (0.55, 0.62, 0.72, 1)
+            on_release: app.cambiar_pantalla("escaner")
+        MDLabel:
+            text: "QR"
+            halign: "center"
+            font_size: "10sp"
+            bold: root.active_tab == "escaner"
+            theme_text_color: "Custom"
+            text_color: (0.0, 0.85, 0.95, 1) if root.active_tab == "escaner" else (0.55, 0.62, 0.72, 1)
+
+    MDBoxLayout:
+        orientation: "vertical"
+        MDIconButton:
+            icon: "swap-horizontal-bold"
+            pos_hint: {"center_x": .5}
+            theme_text_color: "Custom"
+            text_color: (0.0, 0.85, 0.95, 1) if root.active_tab == "prestamos" else (0.55, 0.62, 0.72, 1)
+            on_release: app.cambiar_pantalla("prestamos")
+        MDLabel:
+            text: "Préstamos"
+            halign: "center"
+            font_size: "10sp"
+            bold: root.active_tab == "prestamos"
+            theme_text_color: "Custom"
+            text_color: (0.0, 0.85, 0.95, 1) if root.active_tab == "prestamos" else (0.55, 0.62, 0.72, 1)
 
 
 MDScreenManager:
-    id: screen_manager
     PantallaLogin:
     PantallaRegistro:
     PantallaInicio:
     PantallaCatalogo:
     PantallaEscaner:
     PantallaPrestamos:
+
+
+# ==========================================
+# 1. PANTALLA LOGIN
+# ==========================================
+<PantallaLogin>:
+    name: "login"
+    md_bg_color: 0.04, 0.07, 0.13, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(22)
+        spacing: dp(16)
+
+        Widget:
+            size_hint_y: 0.12
+
+        MDBoxLayout:
+            size_hint: None, None
+            size: dp(72), dp(72)
+            pos_hint: {"center_x": .5}
+            md_bg_color: 0.06, 0.16, 0.24, 1
+            radius: [dp(22)]
+            line_color: 0.0, 0.85, 0.95, 0.6
+            line_width: 1.4
+            MDIcon:
+                icon: "lan"
+                font_size: "38sp"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                theme_text_color: "Custom"
+                text_color: 0.0, 0.85, 0.95, 1
+
+        MDBoxLayout:
+            orientation: "vertical"
+            adaptive_height: True
+            spacing: dp(4)
+            MDLabel:
+                text: "LabRedes UCT"
+                halign: "center"
+                font_size: "26sp"
+                bold: True
+                adaptive_height: True
+                theme_text_color: "Custom"
+                text_color: 0.96, 0.98, 1, 1
+            MDLabel:
+                text: "Control de Inventario y Préstamos A+S"
+                halign: "center"
+                font_size: "13sp"
+                adaptive_height: True
+                theme_text_color: "Custom"
+                text_color: 0.58, 0.66, 0.78, 1
+
+        CardPanel:
+            padding: dp(18)
+            spacing: dp(14)
+
+            MDTextField:
+                id: login_email
+                mode: "outlined"
+                MDTextFieldLeadingIcon:
+                    icon: "email-outline"
+                MDTextFieldHintText:
+                    text: "Correo institucional (@uct.cl)"
+
+            MDTextField:
+                id: login_pass
+                mode: "outlined"
+                password: True
+                MDTextFieldLeadingIcon:
+                    icon: "lock-outline"
+                MDTextFieldHintText:
+                    text: "Contraseña"
+
+            MDButton:
+                style: "filled"
+                pos_hint: {"center_x": .5}
+                theme_bg_color: "Custom"
+                md_bg_color: 0.0, 0.78, 0.88, 1
+                on_release: app.ejecutar_login(login_email.text, login_pass.text)
+                MDButtonIcon:
+                    icon: "login"
+                    theme_icon_color: "Custom"
+                    icon_color: 0.03, 0.07, 0.12, 1
+                MDButtonText:
+                    text: "INGRESAR AL SISTEMA"
+                    bold: True
+                    theme_text_color: "Custom"
+                    text_color: 0.03, 0.07, 0.12, 1
+
+            MDButton:
+                style: "text"
+                pos_hint: {"center_x": .5}
+                on_release: app.cambiar_pantalla("registro")
+                MDButtonText:
+                    text: "¿No tienes cuenta? Regístrate aquí"
+                    theme_text_color: "Custom"
+                    text_color: 0.0, 0.85, 0.95, 1
+
+        Widget:
+            size_hint_y: 0.12
+
+        MDBoxLayout:
+            adaptive_height: True
+            padding: [dp(12), dp(8)]
+            md_bg_color: 0.08, 0.12, 0.20, 1
+            radius: [dp(10)]
+            MDLabel:
+                text: app.mensaje_banner
+                halign: "center"
+                font_size: "11sp"
+                adaptive_height: True
+                theme_text_color: "Custom"
+                text_color: 0.58, 0.66, 0.78, 1
+
+
+# ==========================================
+# 2. PANTALLA REGISTRO
+# ==========================================
+<PantallaRegistro>:
+    name: "registro"
+    md_bg_color: 0.04, 0.07, 0.13, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(22)
+        spacing: dp(16)
+
+        Widget:
+            size_hint_y: 0.1
+
+        MDLabel:
+            text: "Crear Cuenta Institucional"
+            halign: "center"
+            font_size: "22sp"
+            bold: True
+            adaptive_height: True
+            theme_text_color: "Custom"
+            text_color: 0.96, 0.98, 1, 1
+
+        MDLabel:
+            text: "Acceso exclusivo para ayudantes y docentes UCT"
+            halign: "center"
+            font_size: "13sp"
+            adaptive_height: True
+            theme_text_color: "Custom"
+            text_color: 0.58, 0.66, 0.78, 1
+
+        CardPanel:
+            padding: dp(18)
+            spacing: dp(14)
+
+            MDTextField:
+                id: reg_email
+                mode: "outlined"
+                MDTextFieldLeadingIcon:
+                    icon: "account-plus-outline"
+                MDTextFieldHintText:
+                    text: "Correo (@uct.cl)"
+
+            MDTextField:
+                id: reg_pass
+                mode: "outlined"
+                password: True
+                MDTextFieldLeadingIcon:
+                    icon: "lock-outline"
+                MDTextFieldHintText:
+                    text: "Contraseña"
+
+            MDTextField:
+                id: reg_confirm
+                mode: "outlined"
+                password: True
+                MDTextFieldLeadingIcon:
+                    icon: "lock-check-outline"
+                MDTextFieldHintText:
+                    text: "Confirmar contraseña"
+
+            MDButton:
+                style: "filled"
+                pos_hint: {"center_x": .5}
+                theme_bg_color: "Custom"
+                md_bg_color: 0.0, 0.78, 0.88, 1
+                on_release: app.registrar_usuario(reg_email.text, reg_pass.text, reg_confirm.text)
+                MDButtonText:
+                    text: "CREAR CUENTA"
+                    bold: True
+                    theme_text_color: "Custom"
+                    text_color: 0.03, 0.07, 0.12, 1
+
+            MDButton:
+                style: "text"
+                pos_hint: {"center_x": .5}
+                on_release: app.cambiar_pantalla("login")
+                MDButtonText:
+                    text: "Volver al inicio de sesión"
+                    theme_text_color: "Custom"
+                    text_color: 0.58, 0.66, 0.78, 1
+
+        Widget:
+            size_hint_y: 0.2
+
+
+# ==========================================
+# 3. PANTALLA INICIO (DASHBOARD NOC)
+# ==========================================
+<PantallaInicio>:
+    name: "inicio"
+    md_bg_color: 0.04, 0.07, 0.13, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(64)
+            padding: [dp(16), dp(8)]
+            spacing: dp(10)
+            MDIcon:
+                icon: "lan"
+                font_size: "26sp"
+                pos_hint: {"center_y": .5}
+                theme_text_color: "Custom"
+                text_color: 0.0, 0.85, 0.95, 1
+            MDBoxLayout:
+                orientation: "vertical"
+                pos_hint: {"center_y": .5}
+                MDLabel:
+                    text: "Panel LabRedes UCT"
+                    font_size: "18sp"
+                    bold: True
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 0.96, 0.98, 1, 1
+                MDLabel:
+                    text: "Laboratorio de Redes • Sesión Activa"
+                    font_size: "11sp"
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 0.0, 0.85, 0.95, 1
+            MDIconButton:
+                icon: "logout"
+                pos_hint: {"center_y": .5}
+                theme_text_color: "Custom"
+                text_color: 0.96, 0.36, 0.36, 1
+                on_release: app.cerrar_sesion()
+
+        MDScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: [dp(16), dp(4), dp(16), dp(16)]
+                spacing: dp(14)
+                adaptive_height: True
+
+                MDBoxLayout:
+                    adaptive_height: True
+                    padding: dp(12)
+                    spacing: dp(10)
+                    md_bg_color: 0.06, 0.16, 0.24, 1
+                    radius: [dp(12)]
+                    line_color: 0.0, 0.85, 0.95, 0.35
+                    line_width: 1
+                    MDIcon:
+                        icon: "bullhorn-outline"
+                        font_size: "22sp"
+                        pos_hint: {"center_y": .5}
+                        theme_text_color: "Custom"
+                        text_color: 0.0, 0.85, 0.95, 1
+                    MDLabel:
+                        text: app.mensaje_banner
+                        font_size: "12sp"
+                        adaptive_height: True
+                        pos_hint: {"center_y": .5}
+                        theme_text_color: "Custom"
+                        text_color: 0.88, 0.94, 1, 1
+
+                MDLabel:
+                    text: "ESTADO EN TIEMPO REAL"
+                    font_size: "11sp"
+                    bold: True
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 0.55, 0.62, 0.72, 1
+
+                MDGridLayout:
+                    cols: 3
+                    spacing: dp(10)
+                    size_hint_y: None
+                    height: dp(112)
+
+                    # KPI 1: Disponibles
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: dp(10)
+                        spacing: dp(4)
+                        md_bg_color: 0.07, 0.20, 0.15, 1
+                        radius: [dp(14)]
+                        line_color: 0.20, 0.88, 0.42, 0.55
+                        line_width: 1.2
+                        MDIcon:
+                            icon: "check-circle-outline"
+                            font_size: "22sp"
+                            pos_hint: {"center_x": .5}
+                            theme_text_color: "Custom"
+                            text_color: 0.20, 0.88, 0.42, 1
+                        MDLabel:
+                            id: lbl_disp
+                            text: "0"
+                            halign: "center"
+                            font_size: "26sp"
+                            bold: True
+                            theme_text_color: "Custom"
+                            text_color: 0.20, 0.88, 0.42, 1
+                        MDLabel:
+                            text: "Disponibles"
+                            halign: "center"
+                            font_size: "11sp"
+                            theme_text_color: "Custom"
+                            text_color: 0.80, 0.95, 0.85, 1
+
+                    # KPI 2: En Préstamo
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: dp(10)
+                        spacing: dp(4)
+                        md_bg_color: 0.22, 0.16, 0.07, 1
+                        radius: [dp(14)]
+                        line_color: 1.0, 0.72, 0.01, 0.55
+                        line_width: 1.2
+                        MDIcon:
+                            icon: "clock-outline"
+                            font_size: "22sp"
+                            pos_hint: {"center_x": .5}
+                            theme_text_color: "Custom"
+                            text_color: 1.0, 0.72, 0.01, 1
+                        MDLabel:
+                            id: lbl_prest
+                            text: "0"
+                            halign: "center"
+                            font_size: "26sp"
+                            bold: True
+                            theme_text_color: "Custom"
+                            text_color: 1.0, 0.72, 0.01, 1
+                        MDLabel:
+                            text: "Prestados"
+                            halign: "center"
+                            font_size: "11sp"
+                            theme_text_color: "Custom"
+                            text_color: 0.98, 0.90, 0.75, 1
+
+                    # KPI 3: En Desuso
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: dp(10)
+                        spacing: dp(4)
+                        md_bg_color: 0.22, 0.09, 0.11, 1
+                        radius: [dp(14)]
+                        line_color: 1.0, 0.38, 0.38, 0.55
+                        line_width: 1.2
+                        MDIcon:
+                            icon: "alert-circle-outline"
+                            font_size: "22sp"
+                            pos_hint: {"center_x": .5}
+                            theme_text_color: "Custom"
+                            text_color: 1.0, 0.38, 0.38, 1
+                        MDLabel:
+                            id: lbl_desu
+                            text: "0"
+                            halign: "center"
+                            font_size: "26sp"
+                            bold: True
+                            theme_text_color: "Custom"
+                            text_color: 1.0, 0.38, 0.38, 1
+                        MDLabel:
+                            text: "En Desuso"
+                            halign: "center"
+                            font_size: "11sp"
+                            theme_text_color: "Custom"
+                            text_color: 0.98, 0.80, 0.80, 1
+
+                MDLabel:
+                    text: "ACCIONES RÁPIDAS"
+                    font_size: "11sp"
+                    bold: True
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 0.55, 0.62, 0.72, 1
+
+                CardPanel:
+                    spacing: dp(10)
+                    MDButton:
+                        style: "filled"
+                        pos_hint: {"center_x": .5}
+                        theme_bg_color: "Custom"
+                        md_bg_color: 0.0, 0.78, 0.88, 1
+                        on_release: app.cambiar_pantalla("catalogo")
+                        MDButtonIcon:
+                            icon: "magnify"
+                            theme_icon_color: "Custom"
+                            icon_color: 0.03, 0.07, 0.12, 1
+                        MDButtonText:
+                            text: "Gestionar Catálogo de Equipos"
+                            bold: True
+                            theme_text_color: "Custom"
+                            text_color: 0.03, 0.07, 0.12, 1
+
+                    MDButton:
+                        style: "outlined"
+                        pos_hint: {"center_x": .5}
+                        on_release: app.cambiar_pantalla("escaner")
+                        MDButtonIcon:
+                            icon: "qrcode"
+                            theme_icon_color: "Custom"
+                            icon_color: 0.0, 0.85, 0.95, 1
+                        MDButtonText:
+                            text: "Sincronizar Estado vía Código QR"
+                            theme_text_color: "Custom"
+                            text_color: 0.92, 0.96, 1, 1
+
+                    MDButton:
+                        style: "outlined"
+                        pos_hint: {"center_x": .5}
+                        on_release: app.cambiar_pantalla("prestamos")
+                        MDButtonIcon:
+                            icon: "clipboard-text-clock-outline"
+                            theme_icon_color: "Custom"
+                            icon_color: 1.0, 0.72, 0.01, 1
+                        MDButtonText:
+                            text: "Revisar Préstamos Activos"
+                            theme_text_color: "Custom"
+                            text_color: 0.92, 0.96, 1, 1
+
+                MDLabel:
+                    text: app.contacto_soporte
+                    halign: "center"
+                    font_size: "11sp"
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 0.45, 0.52, 0.62, 1
+
+        NavBar:
+            active_tab: "inicio"
+
+
+# ==========================================
+# 4. PANTALLA CATÁLOGO
+# ==========================================
+<PantallaCatalogo>:
+    name: "catalogo"
+    md_bg_color: 0.04, 0.07, 0.13, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(58)
+            padding: [dp(16), dp(8)]
+            MDLabel:
+                text: "Catálogo de Equipamiento"
+                font_size: "20sp"
+                bold: True
+                theme_text_color: "Custom"
+                text_color: 0.96, 0.98, 1, 1
+
+        MDBoxLayout:
+            adaptive_height: True
+            padding: [dp(16), dp(4), dp(16), dp(10)]
+            MDTextField:
+                id: txt_buscar
+                mode: "outlined"
+                on_text: app.actualizar_catalogo(self.text)
+                MDTextFieldLeadingIcon:
+                    icon: "magnify"
+                MDTextFieldHintText:
+                    text: "Buscar switch, router, código QR..."
+
+        MDScrollView:
+            MDBoxLayout:
+                id: lista_catalogo
+                orientation: "vertical"
+                padding: [dp(12), dp(4), dp(12), dp(16)]
+                spacing: dp(8)
+                adaptive_height: True
+
+        NavBar:
+            active_tab: "catalogo"
+
+
+# ==========================================
+# 5. PANTALLA ESCÁNER QR (SYNC MÓVIL)
+# ==========================================
+<PantallaEscaner>:
+    name: "escaner"
+    md_bg_color: 0.04, 0.07, 0.13, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(56)
+            padding: [dp(16), dp(8)]
+            MDLabel:
+                text: "Sincronización Móvil QR"
+                font_size: "20sp"
+                bold: True
+                theme_text_color: "Custom"
+                text_color: 0.96, 0.98, 1, 1
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: [dp(16), dp(4), dp(16), dp(8)]
+            spacing: dp(8)
+            adaptive_height: True
+
+            CardPanel:
+                padding: dp(14)
+                spacing: dp(8)
+
+                MDBoxLayout:
+                    size_hint: None, None
+                    size: dp(168), dp(168)
+                    pos_hint: {"center_x": .5}
+                    padding: dp(8)
+                    md_bg_color: 1, 1, 1, 1
+                    radius: [dp(14)]
+                    Image:
+                        id: qr_image_view
+                        allow_stretch: True
+                        keep_ratio: True
+
+                MDLabel:
+                    id: lbl_qr_titulo
+                    text: "Selecciona un equipo abajo"
+                    halign: "center"
+                    font_size: "15sp"
+                    bold: True
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 0.0, 0.85, 0.95, 1
+
+                MDLabel:
+                    id: lbl_qr_codigo
+                    text: "Escanea con la cámara de tu teléfono"
+                    halign: "center"
+                    font_size: "11sp"
+                    adaptive_height: True
+                    theme_text_color: "Custom"
+                    text_color: 0.62, 0.70, 0.82, 1
+
+        MDLabel:
+            text: "SELECCIONAR EQUIPO PARA GENERAR QR"
+            font_size: "11sp"
+            bold: True
+            padding: [dp(16), dp(4)]
+            adaptive_height: True
+            theme_text_color: "Custom"
+            text_color: 0.55, 0.62, 0.72, 1
+
+        MDScrollView:
+            MDBoxLayout:
+                id: lista_escaner
+                orientation: "vertical"
+                padding: [dp(12), dp(4), dp(12), dp(12)]
+                spacing: dp(6)
+                adaptive_height: True
+
+        NavBar:
+            active_tab: "escaner"
+
+
+# ==========================================
+# 6. PANTALLA PRÉSTAMOS ACTIVOS
+# ==========================================
+<PantallaPrestamos>:
+    name: "prestamos"
+    md_bg_color: 0.04, 0.07, 0.13, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(58)
+            padding: [dp(16), dp(8)]
+            spacing: dp(8)
+            MDIcon:
+                icon: "hand-holding"
+                font_size: "24sp"
+                pos_hint: {"center_y": .5}
+                theme_text_color: "Custom"
+                text_color: 1.0, 0.72, 0.01, 1
+            MDLabel:
+                text: "Equipos en Préstamo"
+                font_size: "20sp"
+                bold: True
+                pos_hint: {"center_y": .5}
+                theme_text_color: "Custom"
+                text_color: 0.96, 0.98, 1, 1
+
+        MDScrollView:
+            MDBoxLayout:
+                id: lista_prestamos
+                orientation: "vertical"
+                padding: [dp(12), dp(4), dp(12), dp(16)]
+                spacing: dp(8)
+                adaptive_height: True
+
+        NavBar:
+            active_tab: "prestamos"

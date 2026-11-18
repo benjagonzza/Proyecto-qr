@@ -1,14 +1,105 @@
 {
     "resumen_kpis": {
-        "total_cambios_estado": 0,
-        "cambios_via_desktop": 0,
-        "cambios_via_qr_movil": 0,
-        "inicios_sesion_exitosos": 1,
-        "tiempo_promedio_gestion_seg": 0.0
+        "total_cambios_estado": 7,
+        "cambios_via_desktop": 4,
+        "cambios_via_qr_movil": 3,
+        "inicios_sesion_exitosos": 6,
+        "tiempo_promedio_gestion_seg": 2.04
     },
     "historial_eventos": [
         {
             "fecha_hora": "2026-11-14 14:38:57",
+            "evento": "login_exitoso",
+            "origen": "Desktop",
+            "duracion_seg": 0.0,
+            "detalle": "Ingreso de admin@uct.cl"
+        },
+        {
+            "fecha_hora": "2026-11-18 08:47:26",
+            "evento": "login_exitoso",
+            "origen": "Desktop",
+            "duracion_seg": 0.0,
+            "detalle": "Ingreso de admin@uct.cl"
+        },
+        {
+            "fecha_hora": "2026-11-18 08:48:33",
+            "evento": "cambio_estado",
+            "origen": "Desktop",
+            "duracion_seg": 5.63,
+            "detalle": "QR-RT-750: Disponible -> En Préstamo"
+        },
+        {
+            "fecha_hora": "2026-11-18 08:49:17",
+            "evento": "cambio_estado",
+            "origen": "Desktop",
+            "duracion_seg": 1.62,
+            "detalle": "QR-RT-750: En Préstamo -> Disponible"
+        },
+        {
+            "fecha_hora": "2026-11-18 08:49:29",
+            "evento": "cambio_estado",
+            "origen": "Desktop",
+            "duracion_seg": 1.35,
+            "detalle": "QR-RT-750: Disponible -> En Préstamo"
+        },
+        {
+            "fecha_hora": "2026-11-18 08:49:55",
+            "evento": "login_exitoso",
+            "origen": "Desktop",
+            "duracion_seg": 0.0,
+            "detalle": "Ingreso de admin@uct.cl"
+        },
+        {
+            "fecha_hora": "2026-11-18 08:50:04",
+            "evento": "cambio_estado",
+            "origen": "Desktop",
+            "duracion_seg": 2.04,
+            "detalle": "QR-RT-750: En Préstamo -> Disponible"
+        },
+        {
+            "fecha_hora": "2026-11-18 09:03:11",
+            "evento": "login_exitoso",
+            "origen": "Desktop",
+            "duracion_seg": 0.0,
+            "detalle": "Ingreso de admin@uct.cl"
+        },
+        {
+            "fecha_hora": "2026-11-18 09:03:32",
+            "evento": "escaneo_qr_web",
+            "origen": "Móvil QR",
+            "duracion_seg": 0.0,
+            "detalle": "Consulta QR QR-SW-2960"
+        },
+        {
+            "fecha_hora": "2026-11-18 09:03:40",
+            "evento": "cambio_estado",
+            "origen": "Móvil QR",
+            "duracion_seg": 1.2,
+            "detalle": "QR-SW-2960: Disponible -> Disponible"
+        },
+        {
+            "fecha_hora": "2026-11-18 09:03:44",
+            "evento": "cambio_estado",
+            "origen": "Móvil QR",
+            "duracion_seg": 1.2,
+            "detalle": "QR-SW-2960: Disponible -> En Préstamo"
+        },
+        {
+            "fecha_hora": "2026-11-18 09:03:48",
+            "evento": "cambio_estado",
+            "origen": "Móvil QR",
+            "duracion_seg": 1.2,
+            "detalle": "QR-SW-2960: En Préstamo -> En Préstamo"
+        },
+        {
+            "fecha_hora": "2026-11-18 09:11:21",
+            "evento": "login_exitoso",
+            "origen": "Desktop",
+            "duracion_seg": 0.0,
+            "detalle": "Ingreso de admin@uct.cl"
+        },
+        {
+            "fecha_hora": "2026-11-18 09:17:48",
             "evento": "login_exitoso",
             "origen": "Desktop",
             "duracion_seg": 0.0,
